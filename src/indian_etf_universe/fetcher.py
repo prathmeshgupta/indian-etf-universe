@@ -32,7 +32,11 @@ class IndianETFFetcher:
                 isin_reinvest = parts[2]
                 scheme_name = parts[3]
                 nav_str = parts[6]
-                nav_date = parts[7]
+                nav_date_raw = parts[7]
+                try:
+                    nav_date = pd.to_datetime(nav_date_raw).strftime("%Y-%m-%d")
+                except:
+                    nav_date = nav_date_raw
 
                 if "ETF" in scheme_name.upper() or "EXCHANGE TRADED" in scheme_name.upper():
                     try:
